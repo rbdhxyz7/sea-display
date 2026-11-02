@@ -11,10 +11,37 @@ class Commodity extends Model
         'stock', 'unit', 'low_stock_threshold', 'photo_path', 'is_active',
     ];
 
-    protected $casts = ['is_active' => 'boolean'];
+    protected $casts = [
+        'cost_price'          => 'float',
+        'selling_price'       => 'float',
+        'stock'               => 'float',
+        'low_stock_threshold' => 'float',
+        'is_active'           => 'boolean',
+    ];
 
     public function category()
     {
         return $this->belongsTo(Category::class);
+    }
+
+    // Status dihitung dari stok, tidak disimpan di database
+    public function getStockStatusAttribute(): string
+    {
+        if ($this->stock <= 0) {
+            return 'Habis';
+        }
+
+        return $this->stock <= $this->low_stock_threshold ? 'Stok Menipis' : 'Tersedia';
+    }
+
+    // Margin = (harga jual - harga modal) / harga modal
+    public function getMarginAttribute(): float
+    {
+        return $this->selling_price - $this->cost_price;
+    }
+
+    public function getMarginPercentAttribute(): float
+    {
+        return $this->cost_price > 0 ? round($this->margin / $this->cost_price * 100, 1) : 0;
     }
 }
