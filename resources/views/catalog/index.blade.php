@@ -3,7 +3,7 @@
 <head>
     <meta charset="utf-8">
     <meta name="viewport" content="width=device-width, initial-scale=1">
-    <title>Sea Display – UD Bintang Laut Desy</title>
+    <title>Sea Display – UD Bintang Laut Deasy</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-white text-slate-800 antialiased">
@@ -11,7 +11,11 @@
 <nav class="border-b border-slate-200">
     <div class="mx-auto flex h-14 max-w-6xl items-center justify-between px-4">
         <span class="text-lg font-bold">≈ Sea Display</span>
-        <a href="#" class="text-sm font-medium">Login Admin</a>
+        <div class="flex items-center gap-4 text-sm font-medium">
+            <a href="{{ route('orders.lookup') }}">Cek Pesanan</a>
+            <a href="{{ route('cart.index') }}">Keranjang ({{ count(session('cart', [])) }})</a>
+            <a href="{{ route('login') }}">Login Admin</a>
+        </div>
     </div>
 </nav>
 
@@ -23,7 +27,7 @@
         </h1>
         <p class="mt-4 max-w-xl text-sm text-cyan-50/80">
             Pilihan komoditas laut berkualitas untuk rumah makan, usaha, dan keluarga Anda.
-            Pesan mudah langsung dari Bu Desy di Pasar Cipondoh.
+            Pesan mudah langsung dari Bu Desy di Freshmarket GLC.
         </p>
         <p class="mt-5 flex gap-5 text-xs text-cyan-100">
             <span>✓ Kualitas terjamin</span><span>✓ Harga transparan</span>
@@ -32,6 +36,14 @@
 </header>
 
 <main class="mx-auto max-w-6xl px-4 py-10">
+    @if (session('status'))
+        <p class="mb-4 rounded-lg bg-green-50 px-4 py-3 text-sm text-green-800" role="status">
+            {{ session('status') }} <a href="{{ route('cart.index') }}" class="font-semibold underline">Lihat keranjang</a>
+        </p>
+    @endif
+    @if (session('error'))
+        <p class="mb-4 rounded-lg bg-red-50 px-4 py-3 text-sm text-red-700" role="alert">{{ session('error') }}</p>
+    @endif
     <p class="text-xs font-bold tracking-widest text-teal-700">KATALOG HARI INI</p>
     <div class="mt-1 flex items-end justify-between">
         <h2 class="text-2xl">Pilih hasil laut favorit Anda</h2>
@@ -80,8 +92,12 @@
                 @endphp
 
                 <article class="flex flex-col overflow-hidden rounded-xl border border-slate-200">
-                    <div class="relative flex aspect-[4/3] items-center justify-center bg-cyan-100 text-5xl">
-                        {{ $emoji }}
+                    <div class="relative flex aspect-[4/3] items-center justify-center overflow-hidden bg-cyan-100 text-5xl">
+                        @if ($c->photo_url)
+                            <img src="{{ $c->photo_url }}" alt="{{ $c->name }}" class="absolute inset-0 h-full w-full object-cover" loading="lazy">
+                        @else
+                            {{ $emoji }}
+                        @endif
                         <span class="absolute left-2 top-2 rounded-md bg-white px-2 py-0.5 text-[10px] font-semibold">
                             {{ $c->category->name }}
                         </span>
@@ -95,10 +111,15 @@
                             Rp {{ number_format($c->selling_price, 0, ',', '.') }}
                             <span class="text-xs font-normal text-slate-500">/ {{ $c->unit }}</span>
                         </p>
-                        <a href="{{ $habis ? '#' : $wa }}" target="_blank"
-                           class="mt-auto rounded-lg py-2.5 text-center text-xs font-semibold text-white {{ $habis ? 'pointer-events-none bg-slate-300' : 'bg-green-600' }}">
-                            {{ $habis ? 'Stok habis' : 'Pesan via WhatsApp' }}
-                        </a>
+                         @if ($habis)
+                            <span class="mt-auto rounded-lg bg-slate-300 py-2.5 text-center text-xs font-semibold text-white">Stok habis</span>
+                        @else
+                            <form method="POST" action="{{ route('cart.add') }}" class="mt-auto">
+                                @csrf
+                                <input type="hidden" name="commodity_id" value="{{ $c->id }}">
+                                <button class="w-full rounded-lg bg-green-600 py-2.5 text-xs font-semibold text-white">Tambah ke keranjang</button>
+                            </form>
+                        @endif
                     </div>
                 </article>
             @endforeach
@@ -107,7 +128,7 @@
 </main>
 
 <footer class="bg-[#0b3b4a] py-6 text-center text-sm text-cyan-100">
-    UD Bintang Laut Desy · Pasar Cipondoh
+    UD Bintang Laut Desy · Freshmarket GLC
 </footer>
 
 </body>

@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Support\Facades\Storage;
 
 class Commodity extends Model
 {
@@ -43,5 +44,10 @@ class Commodity extends Model
     public function getMarginPercentAttribute(): float
     {
         return $this->cost_price > 0 ? round($this->margin / $this->cost_price * 100, 1) : 0;
+    }
+
+        public function getPhotoUrlAttribute(): ?string
+    {
+        return $this->photo_path ? asset('storage/' . $this->photo_path) : null;
     }
 }
