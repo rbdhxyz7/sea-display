@@ -16,7 +16,7 @@
             <p class="text-3xl font-semibold leading-snug">
                 “Kelola komoditas dengan mudah, layani pelanggan dengan lebih baik.”
             </p>
-            <p class="mt-4 text-sm text-cyan-100">— Bu Desy, Pemilik Sea Display</p>
+            <p class="mt-4 text-sm text-cyan-100">— Bu Deasy, Pemilik Sea Display</p>
         </div>
     </div>
 
@@ -25,8 +25,8 @@
             <a href="{{ route('catalog') }}" class="mb-6 block text-sm text-teal-700 lg:hidden">← Kembali ke katalog</a>
 
             <p class="text-xs font-bold tracking-widest text-teal-700">PORTAL PENGELOLA</p>
-            <h1 class="mt-2 text-3xl font-semibold leading-tight text-[#0b3b4a]">Selamat datang,<br>Bu Desy</h1>
-            <p class="mt-2 text-sm text-slate-500">Masuk untuk mengelola katalog dan stok komoditas.</p>
+            <h1 class="mt-2 text-3xl font-semibold leading-tight text-[#0b3b4a]">Silakan masuk</h1>
+            <p class="mt-2 text-sm text-slate-500">Gunakan akun pengelola untuk mengatur stok, harga, dan pesanan toko.</p>
 
             <form method="POST" action="{{ url('/login') }}" class="mt-8 space-y-4">
                 @csrf

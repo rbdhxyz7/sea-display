@@ -34,7 +34,7 @@
     ];
     $actions = $actionMap[$order->status] ?? [];
 
-    $lines = ["Halo {$order->customer_name}, ini Bu Desy dari UD Bintang Laut Desy.", "Pesanan {$order->order_code}:"];
+    $lines = ["Halo {$order->customer_name}, ini Bu Deasy dari UD Bintang Laut Deasy.", "Pesanan {$order->order_code}:"];
     foreach ($order->items as $i) {
         $lines[] = "- {$i->commodity_name} {$fmt($i->quantity)} {$i->unit}";
     }

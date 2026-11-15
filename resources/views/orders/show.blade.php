@@ -14,7 +14,7 @@
         default => 'bg-red-100 text-red-800',
     };
 
-    $lines = ['Halo Bu Desy, saya sudah memesan lewat Sea Display.', "Kode pesanan: {$order->order_code}", "Nama: {$order->customer_name}", ''];
+    $lines = ['Halo Bu Deasy, saya sudah memesan lewat Sea Display.', "Kode pesanan: {$order->order_code}", "Nama: {$order->customer_name}", ''];
     foreach ($order->items as $i) {
         $lines[] = "- {$i->commodity_name} {$fmt($i->quantity)} {$i->unit}";
     }

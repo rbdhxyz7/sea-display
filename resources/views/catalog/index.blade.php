@@ -27,7 +27,7 @@
         </h1>
         <p class="mt-4 max-w-xl text-sm text-cyan-50/80">
             Pilihan komoditas laut berkualitas untuk rumah makan, usaha, dan keluarga Anda.
-            Pesan mudah langsung dari Bu Desy di Freshmarket GLC.
+            Pesan mudah langsung dari Bu Deasy di Freshmarket GLC.
         </p>
         <p class="mt-5 flex gap-5 text-xs text-cyan-100">
             <span>✓ Kualitas terjamin</span><span>✓ Harga transparan</span>
@@ -88,7 +88,7 @@
                     };
                     $habis = $c->stock_status === 'Habis';
                     $wa = 'https://wa.me/' . config('shop.whatsapp') . '?text='
-                        . urlencode('Halo Bu Desy, saya mau pesan ' . $c->name . '.');
+                        . urlencode('Halo Bu Deasy, saya mau pesan ' . $c->name . '.');
                 @endphp
 
                 <article class="flex flex-col overflow-hidden rounded-xl border border-slate-200">
@@ -128,7 +128,7 @@
 </main>
 
 <footer class="bg-[#0b3b4a] py-6 text-center text-sm text-cyan-100">
-    UD Bintang Laut Desy · Freshmarket GLC
+    UD Bintang Laut Deasy · Freshmarket GLC
 </footer>
 
 </body>

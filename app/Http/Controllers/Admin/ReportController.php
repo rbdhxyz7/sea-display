@@ -42,7 +42,7 @@ class ReportController extends Controller
 
         $perCommodity = StockMovement::query()
             ->join('commodities', 'commodities.id', '=', 'stock_movements.commodity_id')
-            ->where('stock_movements.source', 'sale')
+            ->sales()
             ->whereBetween('stock_movements.moved_at', [$from, $to])
             ->selectRaw('commodities.name, commodities.unit,
                          SUM(stock_movements.quantity) AS qty,

@@ -26,7 +26,7 @@
 @endphp
 
 <div class="print-only mb-4">
-    <p class="text-lg font-bold">Laporan Penjualan – UD Bintang Laut Desy</p>
+    <p class="text-lg font-bold">Laporan Penjualan – UD Bintang Laut Deasy</p>
     <p class="text-sm">Periode: {{ $periodLabel }}</p>
 </div>
 

@@ -13,7 +13,7 @@ class AdminSeeder extends Seeder
         $user = User::firstOrNew(['email' => env('ADMIN_EMAIL')]);
 
         $user->forceFill([
-            'name'     => 'Bu Desy',
+            'name'     => 'Bu Deasy',
             'password' => Hash::make(env('ADMIN_PASSWORD')),
             'role'     => 'owner',
         ])->save();
